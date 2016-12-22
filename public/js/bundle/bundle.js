@@ -21517,10 +21517,7 @@
 	    function Main(props) {
 	        _classCallCheck(this, Main);
 
-	        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
-
-	        _this.isLogged = !!localStorage.getItem('isLogged');
-	        return _this;
+	        return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 	    }
 
 	    _createClass(Main, [{
@@ -21534,7 +21531,7 @@
 	                    null,
 	                    'Main Component'
 	                ),
-	                _react2.default.createElement(_Login2.default, { loggedIn: this.isLogged })
+	                _react2.default.createElement(_Login2.default, null)
 	            );
 	        }
 	    }]);
@@ -21576,8 +21573,8 @@
 
 	        var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
-	        _this.loginVK = _this.loginVK.bind(_this);
-	        _this.state = { isAuth: 'Auth' };
+	        _this.state = { isAuth: false };
+	        _this.check = _this.check.bind(_this);
 	        return _this;
 	    }
 
@@ -21585,6 +21582,23 @@
 	        key: 'loginVK',
 	        value: function loginVK() {
 	            VK.Auth.login(authInfo);
+	        }
+	    }, {
+	        key: 'check',
+	        value: function check() {
+	            var that = this;
+	            function authInfo(response) {
+	                if (response.session) {
+	                    that.setState({
+	                        isAuth: true
+	                    });
+	                } else {
+	                    that.setState({
+	                        isAuth: false
+	                    });
+	                }
+	            }
+	            VK.Auth.getLoginStatus(authInfo);
 	        }
 	    }, {
 	        key: 'render',
@@ -21600,7 +21614,7 @@
 	                _react2.default.createElement(
 	                    'h1',
 	                    null,
-	                    this.props.loggedIn ? 'You are logged In' : 'You are not logged In'
+	                    this.state.isAuth ? 'You are logged In' : 'You are not logged In'
 	                )
 	            );
 	        }
