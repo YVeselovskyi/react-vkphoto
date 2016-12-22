@@ -5,16 +5,13 @@ class Login extends React.Component{
         super(props);
         this.state = {isAuth: false};
         this.check = this.check.bind(this);
+        this.loginVK = this.loginVK.bind(this);
     };
 
 
     loginVK(){
-        VK.Auth.login(authInfo);
-    }
-
-    check(){
         let that = this;
-        function authInfo(response) {
+        function checkAuth(response) {
             if (response.session) {
                 that.setState({
                     isAuth: true
@@ -25,7 +22,27 @@ class Login extends React.Component{
                 })
             }
         }
-        VK.Auth.getLoginStatus(authInfo);
+        VK.Auth.login(checkAuth);
+    }
+
+    componentDidMount() {
+        this.check();
+    }
+
+    check(){
+        let that = this;
+        function checkAuth(response) {
+            if (response.session) {
+                that.setState({
+                    isAuth: true
+                })
+            } else {
+                that.setState({
+                    isAuth: false
+                })
+            }
+        }
+        VK.Auth.getLoginStatus(checkAuth);
     }
 
 

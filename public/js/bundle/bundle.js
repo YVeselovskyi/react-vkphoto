@@ -21575,19 +21575,15 @@
 
 	        _this.state = { isAuth: false };
 	        _this.check = _this.check.bind(_this);
+	        _this.loginVK = _this.loginVK.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(Login, [{
 	        key: 'loginVK',
 	        value: function loginVK() {
-	            VK.Auth.login(authInfo);
-	        }
-	    }, {
-	        key: 'check',
-	        value: function check() {
 	            var that = this;
-	            function authInfo(response) {
+	            function checkAuth(response) {
 	                if (response.session) {
 	                    that.setState({
 	                        isAuth: true
@@ -21598,7 +21594,29 @@
 	                    });
 	                }
 	            }
-	            VK.Auth.getLoginStatus(authInfo);
+	            VK.Auth.login(checkAuth);
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.check();
+	        }
+	    }, {
+	        key: 'check',
+	        value: function check() {
+	            var that = this;
+	            function checkAuth(response) {
+	                if (response.session) {
+	                    that.setState({
+	                        isAuth: true
+	                    });
+	                } else {
+	                    that.setState({
+	                        isAuth: false
+	                    });
+	                }
+	            }
+	            VK.Auth.getLoginStatus(checkAuth);
 	        }
 	    }, {
 	        key: 'render',
