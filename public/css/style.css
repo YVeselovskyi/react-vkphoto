@@ -1,0 +1,15 @@
+body, html{
+  margin: 0;
+  padding: 0;
+}
+input, textarea{
+  display: block;
+}
+.form-group .deny{
+	border-color: #db4c3f;
+}
+
+.hidden{
+	display: none;
+}
+
