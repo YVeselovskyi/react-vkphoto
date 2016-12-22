@@ -21517,7 +21517,10 @@
 	    function Main(props) {
 	        _classCallCheck(this, Main);
 
-	        return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+
+	        _this.isLogged = !!localStorage.getItem('isLogged');
+	        return _this;
 	    }
 
 	    _createClass(Main, [{
@@ -21531,7 +21534,7 @@
 	                    null,
 	                    'Main Component'
 	                ),
-	                _react2.default.createElement(_Login2.default, null)
+	                _react2.default.createElement(_Login2.default, { loggedIn: this.isLogged })
 	            );
 	        }
 	    }]);
@@ -21545,7 +21548,7 @@
 /* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -21574,24 +21577,30 @@
 	        var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
 	        _this.loginVK = _this.loginVK.bind(_this);
+	        _this.state = { isAuth: 'Auth' };
 	        return _this;
 	    }
 
 	    _createClass(Login, [{
-	        key: "loginVK",
+	        key: 'loginVK',
 	        value: function loginVK() {
 	            VK.Auth.login(authInfo);
 	        }
 	    }, {
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "div",
+	                'div',
 	                null,
 	                _react2.default.createElement(
-	                    "button",
-	                    { className: "btn", onClick: this.loginVK },
-	                    "Login"
+	                    'button',
+	                    { className: 'btn', onClick: this.loginVK },
+	                    'Login'
+	                ),
+	                _react2.default.createElement(
+	                    'h1',
+	                    null,
+	                    this.props.loggedIn ? 'You are logged In' : 'You are not logged In'
 	                )
 	            );
 	        }

@@ -20,11 +20,12 @@
   VK.init({
     apiId: 5423418
   });
-  
+
   function authInfo(response) {
     if (response.session) {
-      console.log('user: ' + response.session.mid);
+      localStorage.setItem('isLogged', true);
     } else {
+      localStorage.setItem('isLogged', false);
       console.log('not auth');
     }
   }
