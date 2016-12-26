@@ -10,6 +10,8 @@ app.get('/', function(req, res){
 });
 
 app.use(express.static('./node_modules/bootstrap/dist'));
+app.use(express.static('./node_modules/react-image-gallery/styles'));
+
 
 
 app.listen(PORT, () => {

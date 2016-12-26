@@ -12,6 +12,7 @@ module.exports = {
           ProfilePhotos: 'public/components/ProfilePhotos.jsx',
           SavedPhotos: 'public/components/SavedPhotos.jsx',
           WallPhotos: 'public/components/WallPhotos.jsx',
+          Gallery: 'public/components/Gallery.jsx',
           NavButtons: 'public/components/NavButtons.jsx'
         },
         extensions: ['' , '.js' , 'jsx']

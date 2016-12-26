@@ -18,6 +18,7 @@ class NavButtons extends React.Component {
     }
     render() {
         let loadedPhotos = this.state.photos;
+        console.log(loadedPhotos);
         return (
             <div className='container'>
               <div className='row'>
