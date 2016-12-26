@@ -1,5 +1,4 @@
 import React from 'react';
-import NavButtons from 'NavButtons';
 
 class Login extends React.Component{
     constructor(props) {
@@ -9,11 +8,10 @@ class Login extends React.Component{
     render() {
         return (
             <div>
-                <button className="btn" onClick={this.props.handleStatus}>Login</button>
+                <button className="btn" onClick={this.props.handleStatus}>Enter VK</button>
             </div>
         );
     }
 }
-
 
 export default Login;

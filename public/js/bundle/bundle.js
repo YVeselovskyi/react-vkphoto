@@ -21503,6 +21503,10 @@
 
 	var _Login2 = _interopRequireDefault(_Login);
 
+	var _NavButtons = __webpack_require__(181);
+
+	var _NavButtons2 = _interopRequireDefault(_NavButtons);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21519,7 +21523,7 @@
 
 	        var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
 
-	        _this.state = { isAuth: false };
+	        _this.state = { isAuth: false, greeting: '' };
 	        _this.loginVK = _this.loginVK.bind(_this);
 	        _this.check = _this.check.bind(_this);
 	        return _this;
@@ -21531,6 +21535,15 @@
 	            var that = this;
 	            function checkAuth(response) {
 	                if (response.session) {
+	                    VK.api('users.get', { users_id: response.session.mid }, function (result) {
+	                        if (result.response) {
+	                            var _result$response$ = result.response[0],
+	                                first_name = _result$response$.first_name,
+	                                last_name = _result$response$.last_name;
+
+	                            that.setState({ greeting: 'Hello, ' + first_name + ' ' + last_name });
+	                        }
+	                    });
 	                    that.setState({
 	                        isAuth: true
 	                    });
@@ -21553,6 +21566,15 @@
 	            var that = this;
 	            function checkAuth(response) {
 	                if (response.session) {
+	                    VK.api('users.get', { users_id: response.session.mid }, function (result) {
+	                        if (result.response) {
+	                            var _result$response$2 = result.response[0],
+	                                first_name = _result$response$2.first_name,
+	                                last_name = _result$response$2.last_name;
+
+	                            that.setState({ greeting: 'Hello, ' + first_name + ' ' + last_name });
+	                        }
+	                    });
 	                    that.setState({
 	                        isAuth: true
 	                    });
@@ -21573,10 +21595,10 @@
 	                _react2.default.createElement(
 	                    'h2',
 	                    null,
-	                    'Main Component'
+	                    'VK PhotoApp'
 	                ),
-	                _react2.default.createElement(_Login2.default, { handleStatus: this.loginVK }),
-	                this.state.isAuth ? 'True' : 'False'
+	                this.state.isAuth ? this.state.greeting : _react2.default.createElement(_Login2.default, { handleStatus: this.loginVK }),
+	                this.state.isAuth ? _react2.default.createElement(_NavButtons2.default, null) : 'Please enter your VK account'
 	            );
 	        }
 	    }]);
@@ -21590,7 +21612,7 @@
 /* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -21601,10 +21623,6 @@
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
-
-	var _NavButtons = __webpack_require__(181);
-
-	var _NavButtons2 = _interopRequireDefault(_NavButtons);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21624,15 +21642,15 @@
 	    }
 
 	    _createClass(Login, [{
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
 	            return _react2.default.createElement(
-	                'div',
+	                "div",
 	                null,
 	                _react2.default.createElement(
-	                    'button',
-	                    { className: 'btn', onClick: this.props.handleStatus },
-	                    'Login'
+	                    "button",
+	                    { className: "btn", onClick: this.props.handleStatus },
+	                    "Enter VK"
 	                )
 	            );
 	        }
@@ -21650,7 +21668,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -21667,6 +21685,10 @@
 
 	var _WallPhotos2 = _interopRequireDefault(_WallPhotos);
 
+	var _SavedPhotos = __webpack_require__(184);
+
+	var _SavedPhotos2 = _interopRequireDefault(_SavedPhotos);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21676,39 +21698,73 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var NavButtons = function (_React$Component) {
-	    _inherits(NavButtons, _React$Component);
+	  _inherits(NavButtons, _React$Component);
 
-	    function NavButtons(props) {
-	        _classCallCheck(this, NavButtons);
+	  function NavButtons(props) {
+	    _classCallCheck(this, NavButtons);
 
-	        return _possibleConstructorReturn(this, (NavButtons.__proto__ || Object.getPrototypeOf(NavButtons)).call(this, props));
-	    }
+	    var _this = _possibleConstructorReturn(this, (NavButtons.__proto__ || Object.getPrototypeOf(NavButtons)).call(this, props));
 
-	    _createClass(NavButtons, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'container' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'row' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'col-md-4' },
-	                        _react2.default.createElement(_ProfilePhotos2.default, null)
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'col-md-4' },
-	                        _react2.default.createElement(_WallPhotos2.default, null)
-	                    )
-	                )
-	            );
+	    _this.state = { photos: [] };
+	    return _this;
+	  }
+
+	  _createClass(NavButtons, [{
+	    key: 'loadPhotos',
+	    value: function loadPhotos(album) {
+	      var that = this;
+	      VK.api('photos.get', { album_id: album }, function (result) {
+	        if (result.response) {
+	          that.setState({ photos: result.response });
 	        }
-	    }]);
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
 
-	    return NavButtons;
+	      var loadedPhotos = this.state.photos;
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'container' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-4' },
+	            _react2.default.createElement(_ProfilePhotos2.default, { getPhotos: function getPhotos() {
+	                return _this2.loadPhotos('profile');
+	              } })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-4' },
+	            _react2.default.createElement(_WallPhotos2.default, { getPhotos: function getPhotos() {
+	                return _this2.loadPhotos('wall');
+	              } })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-4' },
+	            _react2.default.createElement(_SavedPhotos2.default, { getPhotos: function getPhotos() {
+	                return _this2.loadPhotos('saved');
+	              } })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          loadedPhotos.map(function (e) {
+	            return _react2.default.createElement('img', { src: e.src_big });
+	          })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return NavButtons;
 	}(_react2.default.Component);
 
 	exports.default = NavButtons;
@@ -21743,40 +21799,20 @@
 	    function ProfilePhotos(props) {
 	        _classCallCheck(this, ProfilePhotos);
 
-	        var _this = _possibleConstructorReturn(this, (ProfilePhotos.__proto__ || Object.getPrototypeOf(ProfilePhotos)).call(this, props));
-
-	        _this.getProfilePhotos = _this.getProfilePhotos.bind(_this);
-	        _this.state = {
-	            loadedPhotos: []
-	        };
-	        return _this;
+	        return _possibleConstructorReturn(this, (ProfilePhotos.__proto__ || Object.getPrototypeOf(ProfilePhotos)).call(this, props));
 	    }
 
 	    _createClass(ProfilePhotos, [{
-	        key: 'getProfilePhotos',
-	        value: function getProfilePhotos() {
-	            var that = this;
-	            VK.api('photos.get', { album_id: 'profile' }, function (result) {
-	                if (result.response) {
-	                    that.setState({ loadedPhotos: result.response });
-	                }
-	            });
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var neededPhotos = this.state.loadedPhotos;
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(
 	                    'button',
-	                    { className: 'btn', onClick: this.getProfilePhotos },
+	                    { className: 'btn', onClick: this.props.getPhotos },
 	                    'Profile Photos'
-	                ),
-	                neededPhotos.map(function (e) {
-	                    return _react2.default.createElement('img', { src: e.src_big });
-	                })
+	                )
 	            );
 	        }
 	    }]);
@@ -21816,40 +21852,20 @@
 	    function WallPhotos(props) {
 	        _classCallCheck(this, WallPhotos);
 
-	        var _this = _possibleConstructorReturn(this, (WallPhotos.__proto__ || Object.getPrototypeOf(WallPhotos)).call(this, props));
-
-	        _this.getWallPhotos = _this.getWallPhotos.bind(_this);
-	        _this.state = {
-	            loadedPhotos: []
-	        };
-	        return _this;
+	        return _possibleConstructorReturn(this, (WallPhotos.__proto__ || Object.getPrototypeOf(WallPhotos)).call(this, props));
 	    }
 
 	    _createClass(WallPhotos, [{
-	        key: 'getWallPhotos',
-	        value: function getWallPhotos() {
-	            var that = this;
-	            VK.api('photos.get', { album_id: 'wall' }, function (result) {
-	                if (result.response) {
-	                    that.setState({ loadedPhotos: result.response });
-	                }
-	            });
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var neededPhotos = this.state.loadedPhotos;
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(
 	                    'button',
-	                    { className: 'btn', onClick: this.getWallPhotos },
+	                    { className: 'btn', onClick: this.props.getPhotos },
 	                    'Wall Photos'
-	                ),
-	                neededPhotos.map(function (e) {
-	                    return _react2.default.createElement('img', { src: e.src_big });
-	                })
+	                )
 	            );
 	        }
 	    }]);
@@ -21858,6 +21874,59 @@
 	}(_react2.default.Component);
 
 	exports.default = WallPhotos;
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SavedPhotos = function (_React$Component) {
+	    _inherits(SavedPhotos, _React$Component);
+
+	    function SavedPhotos(props) {
+	        _classCallCheck(this, SavedPhotos);
+
+	        return _possibleConstructorReturn(this, (SavedPhotos.__proto__ || Object.getPrototypeOf(SavedPhotos)).call(this, props));
+	    }
+
+	    _createClass(SavedPhotos, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'button',
+	                    { className: 'btn', onClick: this.props.getPhotos },
+	                    'Saved Photos'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return SavedPhotos;
+	}(_react2.default.Component);
+
+	exports.default = SavedPhotos;
 
 /***/ }
 /******/ ]);

@@ -10,6 +10,7 @@ module.exports = {
           Main: 'public/components/Main.jsx',
           Login: 'public/components/Login.jsx',
           ProfilePhotos: 'public/components/ProfilePhotos.jsx',
+          SavedPhotos: 'public/components/SavedPhotos.jsx',
           WallPhotos: 'public/components/WallPhotos.jsx',
           NavButtons: 'public/components/NavButtons.jsx'
         },
