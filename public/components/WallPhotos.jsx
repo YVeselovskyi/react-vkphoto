@@ -7,7 +7,7 @@ class WallPhotos extends React.Component {
     render() {
         return (
             <div>
-                <button className='btn' onClick={this.props.getPhotos}>Wall Photos</button>
+                <button className='btn btn-success' onClick={this.props.getPhotos}>Wall Photos</button>
             </div>
         );
     }

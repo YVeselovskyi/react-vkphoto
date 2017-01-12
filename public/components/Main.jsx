@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from 'Login';
 import NavButtons from 'NavButtons';
-import Gallery from 'Gallery';
+//import Gallery from 'Gallery';
 
 class Main extends React.Component {
     constructor(props) {
@@ -61,11 +61,11 @@ class Main extends React.Component {
 
     render() {
         return (
-            <div>
-                <h2>VK PhotoApp</h2>
-                {this.state.isAuth ? this.state.greeting : <Login handleStatus={this.loginVK}/>}
+            <div className='center'>
+                <h1>VK PhotoApp</h1>
+                {this.state.isAuth ? <h3>{this.state.greeting}</h3> : <Login handleStatus={this.loginVK}/>}
+                {this.state.isAuth && <p>Click buttons below to see photos from your albums </p>}
                 {this.state.isAuth ? <NavButtons/> : 'Please enter your VK account'}
-                <Gallery/>
             </div>
         );
     }

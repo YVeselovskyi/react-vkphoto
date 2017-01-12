@@ -2,6 +2,7 @@ import React from 'react';
 import ProfilePhotos from 'ProfilePhotos';
 import WallPhotos from 'WallPhotos';
 import SavedPhotos from 'SavedPhotos';
+import moment from 'moment';
 
 class NavButtons extends React.Component {
     constructor(props) {
@@ -17,8 +18,7 @@ class NavButtons extends React.Component {
       });
     }
     render() {
-        let loadedPhotos = this.state.photos;
-        console.log(loadedPhotos);
+        let loadedPhotos = this.state.photos.reverse();
         return (
             <div className='container'>
               <div className='row'>
@@ -26,12 +26,19 @@ class NavButtons extends React.Component {
                 <div className='col-md-4'><WallPhotos getPhotos={() => this.loadPhotos('wall')}/></div>
                 <div className='col-md-4'><SavedPhotos getPhotos={() => this.loadPhotos('saved')}/></div>
               </div>
-              <div>
-                {loadedPhotos.map((e) => {
-                  return <img src={e.src_big}/>
-                })}
-              </div>
+              <ul className='rig'>
+                  {loadedPhotos.map((e, i) => {
+                    return(
+                    <li key={i}>
+                      <img src={e.src_big}/>
+                      <h3>{moment(e.created*1000).format('MMMM Do YYYY')}</h3>
+                    </li>
+                  )
+                  })}
+              </ul>
             </div>
+
+
         );
     }
 }
