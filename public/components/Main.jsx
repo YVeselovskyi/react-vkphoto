@@ -1,7 +1,6 @@
 import React from 'react';
 import Login from 'Login';
 import NavButtons from 'NavButtons';
-//import Gallery from 'Gallery';
 
 class Main extends React.Component {
     constructor(props) {
