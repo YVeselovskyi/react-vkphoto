@@ -21738,6 +21738,11 @@
 	      var _this2 = this;
 
 	      var loadedPhotos = this.state.photos.reverse();
+	      var emptyPhotosStyle = {
+	        margin: '10px 0 0 0',
+	        fontSize: '16px',
+	        border: 'none'
+	      };
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container' },
@@ -21769,7 +21774,7 @@
 	        _react2.default.createElement(
 	          'ul',
 	          { className: 'rig' },
-	          loadedPhotos.map(function (e, i) {
+	          loadedPhotos.length != 0 ? loadedPhotos.map(function (e, i) {
 	            return _react2.default.createElement(
 	              'li',
 	              { key: i },
@@ -21780,7 +21785,11 @@
 	                (0, _moment2.default)(e.created * 1000).format('MMMM Do YYYY')
 	              )
 	            );
-	          })
+	          }) : _react2.default.createElement(
+	            'li',
+	            { style: emptyPhotosStyle },
+	            'You didn\'t load any photos \uD83D\uDE05'
+	          )
 	        )
 	      );
 	    }

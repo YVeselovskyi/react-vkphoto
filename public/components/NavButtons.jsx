@@ -19,6 +19,11 @@ class NavButtons extends React.Component {
     }
     render() {
         let loadedPhotos = this.state.photos.reverse();
+        const emptyPhotosStyle = {
+          margin: '10px 0 0 0',
+          fontSize: '16px',
+          border: 'none',
+        };
         return (
             <div className='container'>
               <div className='row'>
@@ -27,14 +32,14 @@ class NavButtons extends React.Component {
                 <div className='col-md-4'><SavedPhotos getPhotos={() => this.loadPhotos('saved')}/></div>
               </div>
               <ul className='rig'>
-                  {loadedPhotos.map((e, i) => {
+                  {loadedPhotos.length != 0 ? loadedPhotos.map((e, i) => {
                     return(
                     <li key={i}>
                       <img src={e.src_big}/>
                       <h3>{moment(e.created*1000).format('MMMM Do YYYY')}</h3>
                     </li>
                   )
-                  })}
+                }) : <li style={emptyPhotosStyle}>You didn't load any photos 😅</li>}
               </ul>
             </div>
 
