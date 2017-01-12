@@ -77,3 +77,10 @@ ul.rig li {
 		margin: 0 0 20px;
 	}
 }
+
+.rig li img {
+  transition: .8s opacity;
+}
+
+.rig:hover img, .rig:hover h3 { opacity: 0.3; }
+.rig:hover img:hover , .rig:hover img:hover + h3{ opacity: 1; }
